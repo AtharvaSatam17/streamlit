@@ -1,0 +1,17 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing dependencies..."
+        - apt-get update -y  # Only if your Dockerfile needs OS packages
+    build:
+      commands:
+        - docker build -t streamlit-app .
+  artifacts:
+    baseDirectory: /
+    files: '**/*'
+environment:
+  variables:
+    STREAMLIT_SERVER_PORT: "8080"   # Critical for Amplify
+    STREAMLIT_SERVER_HEADLESS: "true"
